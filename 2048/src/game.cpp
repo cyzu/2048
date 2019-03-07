@@ -6,24 +6,42 @@
 //  Copyright © 2019 Cyzu. All rights reserved.
 //
 
-#include <cstdint>
+//#include <cstdint>
 #include <cstdio>
-#include <unistd.h>
+//#include <unistd.h>
 #include <ncurses.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 
 #include <string>
+#include <fstream>
 
 #include "game.h"
 
 WINDOW *window;
+int xmin = 5, ymin = 3;
+int high_score;
 
 void write_score(int score){
     std::string str = "Score : " + std::to_string(score);
-    mvaddstr(3, 5, str.c_str());
+    mvaddstr(ymin, xmin, str.c_str());
+}
+
+void write_high_score(int score){
+    std::string str = "High score : " + std::to_string(score);
+    mvaddstr(ymin+2, xmin, str.c_str());
+}
+
+void replace_hight_score(int score){
+    std::ofstream file("doc/highScore", std::ofstream::trunc);
+    if(file.is_open())
+        file << score;
+    file.close();
 }
 
 int init(){
+    int score;
+    std::ifstream file("doc/highScore");
+    
     window = initscr();
     cbreak();
     noecho();
@@ -47,6 +65,14 @@ int init(){
     // Enable color modification
     start_color();
     
+    if (file.is_open()){
+        file >> score;
+        high_score = score;
+        write_high_score(score);
+    }
+    write_score(0);
+    
+    file.close();
     return 0;
 }
 
@@ -57,7 +83,7 @@ void close(){
 void run(){
     
     int input;
-    int x = 5, y = 3;
+    int x = xmin+10, y = ymin+10;
     bool quit = false;
     int score = 0, tick = 0;
     
@@ -107,13 +133,15 @@ void run(){
         if (quit == true) break;
         mvaddch(y, x, '$');
         
-        if(tick % 30000 == 0) score ++;
-        
-        write_score(score);
+//        write_score(score);
 //        usleep(100000); // 100 ms
         tick++;
         refresh();
     }
-    
+    if (score > high_score){
+        printf("high score modifié\n");
+        replace_hight_score(score);
+    }
+        
     close();
 }

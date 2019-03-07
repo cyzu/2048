@@ -6,8 +6,8 @@
 //  Copyright © 2019 Cyzu. All rights reserved.
 //
 
-#include <iostream>
-#include <cstdint>
+//#include <iostream>
+//#include <cstdint>
 
 #include "game.h"
 

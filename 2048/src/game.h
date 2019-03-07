@@ -10,6 +10,9 @@
 #define game_h
 
 void write_score(int score);
+void write(int score);
+void replace_hight_score(int score);
+
 int init();
 void close();
 void run();

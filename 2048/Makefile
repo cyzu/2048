@@ -19,7 +19,7 @@ bin/main.o: src/main.cpp
 	$(CC) -g -c -o $@ $^ $(CFLAGS)
 
 bin/game.o: src/game.cpp src/game.h
-	$(CC) -g -c -o $@ $^ $(CFLAGS)
+	$(CC) -g -c -o $@ src/game.cpp $(CFLAGS)
 
 clean ::
 	rm -f bin/*.o $(EXEC)
