@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "38"
             endingLineNumber = "38"
-            landmarkName = "init()"
+            landmarkName = "replace_hight_score(int score)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

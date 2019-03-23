@@ -19,6 +19,8 @@
 
 WINDOW *window;
 int xmin = 5, ymin = 3;
+int case_size_x = 5, case_size_y = 3;
+int first_case_y = ymin+5+2, first_case_x = xmin+3;
 int high_score;
 
 void write_score(int score){
@@ -28,7 +30,7 @@ void write_score(int score){
 
 void write_high_score(int score){
     std::string str = "High score : " + std::to_string(score);
-    mvaddstr(ymin+2, xmin, str.c_str());
+    mvaddstr(ymin+1, xmin, str.c_str());
 }
 
 void replace_hight_score(int score){
@@ -36,6 +38,27 @@ void replace_hight_score(int score){
     if(file.is_open())
         file << score;
     file.close();
+}
+
+void draw_square(int size){
+    int x, y;
+    
+    move(ymin+5, xmin);
+    getyx(window, y, x);
+
+    for (int i = 0; i <= size * case_size_y; i++) {
+        
+        if (i == 0){
+            mvaddstr(y, xmin+1, "_______________________");
+        }
+        else if (i % 3 == 0){
+             mvaddstr(y, xmin, "|_____|_____|_____|_____|");
+        }
+        else {
+            mvaddstr(y, xmin, "|     |     |     |     |");
+        }
+        y++;
+    }
 }
 
 int init(){
@@ -71,6 +94,7 @@ int init(){
         write_high_score(score);
     }
     write_score(0);
+    draw_square(4);
     
     file.close();
     return 0;
@@ -83,7 +107,7 @@ void close(){
 void run(){
     
     int input;
-    int x = xmin+10, y = ymin+10;
+    int x = xmin+30, y = ymin+30;
     bool quit = false;
     int score = 0, tick = 0;
     
