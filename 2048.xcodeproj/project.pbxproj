@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A38792A22465ECE00633364 /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A38792822465ECE00633364 /* Matrix.cpp */; };
 		7AE7F234222EFD9B00DCE426 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AE7F233222EFD9B00DCE426 /* main.cpp */; };
 		7AE7F23D222EFE0500DCE426 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 7AE7F23C222EFE0500DCE426 /* Makefile */; };
 		7AE7F241222F151800DCE426 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AE7F23F222F151800DCE426 /* game.cpp */; };
@@ -25,6 +26,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7A38792822465ECE00633364 /* Matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
+		7A38792922465ECE00633364 /* Matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
 		7AE7F230222EFD9B00DCE426 /* 2048 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 2048; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AE7F233222EFD9B00DCE426 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		7AE7F23C222EFE0500DCE426 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -43,6 +46,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A38792722465DDC00633364 /* obj */ = {
+			isa = PBXGroup;
+			children = (
+				7A38792822465ECE00633364 /* Matrix.cpp */,
+				7A38792922465ECE00633364 /* Matrix.h */,
+			);
+			path = obj;
+			sourceTree = "<group>";
+		};
 		7AE7F227222EFD9B00DCE426 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +74,7 @@
 		7AE7F232222EFD9B00DCE426 /* 2048 */ = {
 			isa = PBXGroup;
 			children = (
+				7A38792722465DDC00633364 /* obj */,
 				7AE7F23B222EFDDF00DCE426 /* src */,
 				7AE7F23A222EFDD900DCE426 /* bin */,
 				7AE7F23C222EFE0500DCE426 /* Makefile */,
@@ -142,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A38792A22465ECE00633364 /* Matrix.cpp in Sources */,
 				7AE7F23D222EFE0500DCE426 /* Makefile in Sources */,
 				7AE7F234222EFD9B00DCE426 /* main.cpp in Sources */,
 				7AE7F241222F151800DCE426 /* game.cpp in Sources */,

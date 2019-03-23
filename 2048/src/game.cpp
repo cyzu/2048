@@ -6,21 +6,21 @@
 //  Copyright © 2019 Cyzu. All rights reserved.
 //
 
-//#include <cstdint>
 #include <cstdio>
-//#include <unistd.h>
 #include <ncurses.h>
-//#include <stdlib.h>
 
 #include <string>
 #include <fstream>
 
 #include "game.h"
+#include "../obj/Matrix.h"
 
 WINDOW *window;
+Matrix matrix;
+
 int xmin = 5, ymin = 3;
-int case_size_x = 5, case_size_y = 3;
-int first_case_y = ymin+5+2, first_case_x = xmin+3;
+int case_size_x = 6, case_size_y = 3;
+int first_case_y = ymin+5+2, first_case_x = xmin+2;
 int high_score;
 
 void write_score(int score){
@@ -49,15 +49,31 @@ void draw_square(int size){
     for (int i = 0; i <= size * case_size_y; i++) {
         
         if (i == 0){
-            mvaddstr(y, xmin+1, "_______________________");
+            mvaddstr(y, xmin+1, "___________________________");
         }
         else if (i % 3 == 0){
-             mvaddstr(y, xmin, "|_____|_____|_____|_____|");
+             mvaddstr(y, xmin, "|______|______|______|______|");
         }
         else {
-            mvaddstr(y, xmin, "|     |     |     |     |");
+            mvaddstr(y, xmin, "|      |      |      |      |");
         }
         y++;
+    }
+}
+
+void show_matrix(){
+    int x = first_case_x, y = first_case_y;
+    
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            if (matrix.get(i, j) > 0){
+                std::string str = std::to_string(matrix.get(i, j));
+                mvaddstr(y, x, str.c_str());
+            }
+            x += case_size_x+1;
+        }
+        x = first_case_x;
+        y += case_size_y;
     }
 }
 
@@ -157,13 +173,14 @@ void run(){
         if (quit == true) break;
         mvaddch(y, x, '$');
         
+        show_matrix();
+        
 //        write_score(score);
 //        usleep(100000); // 100 ms
         tick++;
         refresh();
     }
     if (score > high_score){
-        printf("high score modifié\n");
         replace_hight_score(score);
     }
         
