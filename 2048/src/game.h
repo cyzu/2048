@@ -10,7 +10,7 @@
 #define game_h
 
 void write_score(int score);
-void write(int score);
+void write_high_score(int score);
 void replace_hight_score(int score);
 
 void draw_square(int size);

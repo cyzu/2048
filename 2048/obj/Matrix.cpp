@@ -18,6 +18,7 @@ Matrix::Matrix(){
         }
     }
     matrix[0][2] = 2;
+    matrix[1][0] = 4;
     matrix[2][0] = 3;
     matrix[3][2] = 1031;
     matrix[3][3] = 105;
@@ -48,5 +49,19 @@ void Matrix::new_number(){
 }
 
 void Matrix::move_up(){
+    //TODO
+    for (int colonne = 0; colonne < 4; colonne++) {
+        for (int ligne = 0; ligne < 3; ligne++) {
+            if (matrix[ligne][colonne] == 0) {
+                int inc = ligne;
+                while (matrix[inc][colonne] == 0) inc++;
+                
+                if(inc < 4){
+                    matrix[ligne][colonne] = matrix[inc][colonne];
+                    matrix[inc][colonne] = 0;
+                }
+            }
+        }
+    }
     
 }

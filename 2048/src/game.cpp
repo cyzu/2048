@@ -63,13 +63,14 @@ void draw_square(int size){
 
 void show_matrix(){
     int x = first_case_x, y = first_case_y;
+    std::string str;
     
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            if (matrix.get(i, j) > 0){
-                std::string str = std::to_string(matrix.get(i, j));
-                mvaddstr(y, x, str.c_str());
-            }
+            if (matrix.get(i, j) == 0) str = "___";
+            else str = std::to_string(matrix.get(i, j));
+            
+            mvaddstr(y, x, str.c_str());
             x += case_size_x+1;
         }
         x = first_case_x;
@@ -153,7 +154,8 @@ void run(){
                 break;
             case KEY_UP:
             case 'e':
-                y -= 1;
+                //y -= 1;
+                matrix.move_up();
                 break;
             case KEY_DOWN:
             case 'd':
