@@ -9,6 +9,7 @@
 #include "Matrix.h"
 #include <cstdlib>
 #include <ctime>
+#include <math.h>
 
 Matrix::Matrix(){
     std::srand((unsigned int)time(NULL));
@@ -20,12 +21,12 @@ Matrix::Matrix(){
     matrix[0][2] = 2;
     matrix[1][0] = 4;
     matrix[2][0] = 3;
-    matrix[3][2] = 1031;
-    matrix[3][3] = 105;
+    matrix[3][2] = 1;
+    matrix[3][3] = 5;
 }
 
 int Matrix::get(int i, int j){
-    return matrix[i][j];
+    return (int) pow(2, matrix[i][j]);
 }
 
 void Matrix::set(int i, int j, int v){

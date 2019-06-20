@@ -67,8 +67,22 @@ void show_matrix(){
     
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            if (matrix.get(i, j) == 0) str = "    ";
+            if (matrix.get(i, j) <= 1) str = "    ";
             else str = std::to_string(matrix.get(i, j));
+            
+            switch (str.length()) {
+                case 1:
+                    str += "   ";      // Add 3 spaces
+                    break;
+                case 2:
+                    str += "  ";       // Add 2 spaces
+                    break;
+                case 3:
+                    str += " ";        // Add one space
+                    break;
+                default:
+                    break;
+            }
             
             mvaddstr(y, x, str.c_str());
             x += case_size_x+1;
