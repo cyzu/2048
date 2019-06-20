@@ -67,7 +67,7 @@ void show_matrix(){
     
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            if (matrix.get(i, j) == 0) str = "___";
+            if (matrix.get(i, j) == 0) str = "    ";
             else str = std::to_string(matrix.get(i, j));
             
             mvaddstr(y, x, str.c_str());
@@ -159,15 +159,18 @@ void run(){
                 break;
             case KEY_DOWN:
             case 'd':
-                y += 1;
+//                y += 1;
+                matrix.move_down();
                 break;
             case KEY_LEFT:
             case 's':
-                x -= 1;
+//                x -= 1;
+                matrix.move_left();
                 break;
             case KEY_RIGHT:
             case 'f':
-                x += 1;
+//                x += 1;
+                matrix.move_right();
                 break;
             default:
                 break;

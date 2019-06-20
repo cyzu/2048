@@ -21,6 +21,9 @@ class Matrix {
     void set(int i, int j, int v);
     void new_number();
     void move_up();
+    void move_down();
+    void move_right();
+    void move_left();
 };
 
 #endif /* Matrix_hpp */

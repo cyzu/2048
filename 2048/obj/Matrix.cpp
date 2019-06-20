@@ -49,7 +49,8 @@ void Matrix::new_number(){
 }
 
 void Matrix::move_up(){
-    //TODO
+    //TODO fusion de case
+    
     for (int colonne = 0; colonne < 4; colonne++) {
         for (int ligne = 0; ligne < 3; ligne++) {
             if (matrix[ligne][colonne] == 0) {
@@ -63,5 +64,55 @@ void Matrix::move_up(){
             }
         }
     }
+}
     
+void Matrix::move_down(){
+    //TODO FUSION DE CASE
+    for (int colonne = 0; colonne < 4; colonne++) {
+        for (int ligne = 3; ligne > 0; ligne--) {
+            if (matrix[ligne][colonne] == 0) {
+                int inc = ligne;
+                while (matrix[inc][colonne] == 0) inc--;
+                
+                if(inc > -1){
+                    matrix[ligne][colonne] = matrix[inc][colonne];
+                    matrix[inc][colonne] = 0;
+                }
+            }
+        }
+    }
+}
+
+void Matrix::move_left(){
+    //TODO FUSION DE CASE
+    for (int ligne = 0; ligne < 4; ligne++) {
+        for (int colonne = 0; colonne < 3; colonne++) {
+            if (matrix[ligne][colonne] == 0) {
+                int inc = colonne;
+                while (matrix[ligne][inc] == 0) inc++;
+                
+                if(inc < 4){
+                    matrix[ligne][colonne] = matrix[ligne][inc];
+                    matrix[ligne][inc] = 0;
+                }
+            }
+        }
+    }
+}
+
+void Matrix::move_right(){
+    //TODO
+    for (int ligne = 0; ligne < 4; ligne++) {
+        for (int colonne = 3; colonne > 0; colonne--) {
+            if (matrix[ligne][colonne] == 0){
+                int inc = colonne;
+                while (matrix[ligne][inc] == 0) inc--;
+                
+                if (inc > -1){
+                    matrix[ligne][colonne] = matrix[ligne][inc];
+                    matrix[ligne][inc] = 0;
+                }
+            }
+        }
+    }
 }
