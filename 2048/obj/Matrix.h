@@ -14,10 +14,17 @@
 class Matrix {
     private :
     int matrix[4][4];
+    bool mfusion[4][4]; // Matrice de fusion
+    
+    void init_mfusion();
+    void set_mfusion(int i, int j); // set false
+    bool get_mfusion(int i, int j);
+    
+    int get(int i, int j); // Return value of matrix
     
     public :
     Matrix();
-    int get(int i, int j);
+    int get_pow(int i, int j); // Return 2^value
     void set(int i, int j, int v);
     void new_number();
     void move_up();

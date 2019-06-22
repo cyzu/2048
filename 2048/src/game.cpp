@@ -67,8 +67,8 @@ void show_matrix(){
     
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            if (matrix.get(i, j) <= 1) str = "    ";
-            else str = std::to_string(matrix.get(i, j));
+            if (matrix.get_pow(i, j) <= 1) str = "    ";
+            else str = std::to_string(matrix.get_pow(i, j));
             
             switch (str.length()) {
                 case 1:

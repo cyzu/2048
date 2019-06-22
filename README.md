@@ -7,4 +7,6 @@ Expliquer algo de déplacement
 
 Expliquer algo de fusion
 
+Execution : make, ./bin/game_2048
+
 
