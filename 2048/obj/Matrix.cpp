@@ -76,10 +76,19 @@ void Matrix::new_number(){
 }
 
 void Matrix::move_up(){
-    //TODO fusion de case
-    
     for (int colonne = 0; colonne < 4; colonne++) {
         for (int ligne = 0; ligne < 3; ligne++) {
+            // Fusion de case côte à côte
+            if (ligne > 0 &&
+                get(ligne, colonne) > 0 &&
+                get(ligne, colonne) == get(ligne - 1, colonne) &&
+                get_mfusion(ligne - 1, colonne)){
+                    set(ligne - 1, colonne, get(ligne, colonne) + 1);
+                    set(ligne, colonne, 0);
+                    set_mfusion(ligne - 1, colonne);
+            }
+            
+            // Déplacement cases
             if (get(ligne, colonne) == 0) {
                 int inc = ligne;
                 while (get(inc, colonne) == 0) inc++;
@@ -87,6 +96,16 @@ void Matrix::move_up(){
                 if(inc < 4){
                     set(ligne, colonne, get(inc, colonne));
                     set(inc, colonne, 0);
+                    
+                    // Fusion après déplacement
+                    if (ligne > 0 &&
+                        get(ligne, colonne) > 0 &&
+                        get(ligne, colonne) == get(ligne - 1, colonne) &&
+                        get_mfusion(ligne - 1, colonne)){
+                            set(ligne - 1, colonne, get(ligne, colonne) + 1);
+                            set(ligne, colonne, 0);
+                            set_mfusion(ligne - 1, colonne);
+                    }
                 }
             }
         }
@@ -95,9 +114,19 @@ void Matrix::move_up(){
 }
     
 void Matrix::move_down(){
-    //TODO FUSION DE CASE
     for (int colonne = 0; colonne < 4; colonne++) {
         for (int ligne = 3; ligne > 0; ligne--) {
+            // Fusion de case côte à côte
+            if (ligne < 3 &&
+                get(ligne, colonne) > 0 &&
+                get(ligne, colonne) == get(ligne + 1, colonne) &&
+                get_mfusion(ligne + 1, colonne)){
+                    set(ligne + 1, colonne, get(ligne, colonne) + 1);
+                    set(ligne, colonne, 0);
+                    set_mfusion(ligne + 1, colonne);
+            }
+            
+            // Déplacement cases
             if (get(ligne, colonne) == 0) {
                 int inc = ligne;
                 while (get(inc, colonne) == 0) inc--;
@@ -105,6 +134,16 @@ void Matrix::move_down(){
                 if(inc > -1){
                     set(ligne, colonne, get(inc, colonne));
                     set(inc, colonne,0);
+                    
+                    // Fusion après déplacement
+                    if (ligne < 3 &&
+                        get(ligne, colonne) > 0 &&
+                        get(ligne, colonne) == get(ligne + 1, colonne) &&
+                        get_mfusion(ligne + 1, colonne)){
+                            set(ligne + 1, colonne, get(ligne, colonne) + 1);
+                            set(ligne, colonne, 0);
+                            set_mfusion(ligne + 1, colonne);
+                    }
                 }
             }
         }
@@ -113,7 +152,6 @@ void Matrix::move_down(){
 }
 
 void Matrix::move_left(){
-    //TODO FUSION DE CASE
     for (int ligne = 0; ligne < 4; ligne++) {
         for (int colonne = 0; colonne < 3; colonne++) {
             // Fusion de case côte à côte
@@ -135,7 +173,7 @@ void Matrix::move_left(){
                     set(ligne, colonne, get(ligne, inc));   // Les case non vide côte à côte
                     set(ligne, inc, 0);                     // L'ancienne case devient vide
                     
-                    //fusion
+                    //fusion après déplacement
                     if (colonne > 0 &&
                         get(ligne, colonne) > 0 &&
                         get(ligne, colonne) == get(ligne, colonne - 1) &&
@@ -153,9 +191,18 @@ void Matrix::move_left(){
 }
 
 void Matrix::move_right(){
-    //TODO
     for (int ligne = 0; ligne < 4; ligne++) {
         for (int colonne = 3; colonne > 0; colonne--) {
+            // Fusion de case côte à côte
+            if (colonne < 3 &&
+                get(ligne, colonne) > 0 &&
+                get(ligne, colonne) == get(ligne, colonne + 1) &&
+                get_mfusion(ligne, colonne + 1)){
+                    set(ligne, colonne + 1, get(ligne, colonne) + 1);
+                    set(ligne, colonne, 0);
+                    set_mfusion(ligne, colonne + 1);
+            }
+            // Déplacement cases
             if (get(ligne, colonne) == 0){
                 int inc = colonne;
                 while (get(ligne, inc) == 0) inc--;
@@ -163,6 +210,16 @@ void Matrix::move_right(){
                 if (inc > -1){
                     set(ligne, colonne, get(ligne, inc));
                     set(ligne, inc, 0);
+                    
+                    //fusion après déplacement
+                    if (colonne < 3 &&
+                        get(ligne, colonne) > 0 &&
+                        get(ligne, colonne) == get(ligne, colonne + 1) &&
+                        get_mfusion(ligne, colonne + 1)){
+                            set(ligne, colonne + 1, get(ligne, colonne) + 1);
+                            set(ligne, colonne, 0);
+                            set_mfusion(ligne, colonne + 1);
+                    }
                 }
             }
         }
