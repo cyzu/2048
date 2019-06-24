@@ -30,11 +30,21 @@ bool Matrix::get_mfusion(int i, int j){
 }
 
 bool Matrix::is_fully(){
+    // Vérifier les cases vides
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             if (get(i, j) == 0) return false;
+            
         }
     }
+    // Vérifier les valeurs adjacentes
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (get(i, j) == get(i+1, j) || get(i, j) == get(i, j+1)) return false;
+        }
+    }
+    // Vérifier dernière case
+    if (get(3, 3) == get(2, 3) || get(3, 3) == get(3, 2)) return false;
     return true;
 }
 

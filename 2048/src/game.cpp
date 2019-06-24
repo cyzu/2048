@@ -99,6 +99,31 @@ void draw_start(){
     mvaddstr(14, 40, "|___  |   | |   | |___| | |  __  /   | |");
     mvaddstr(15, 40, " ___| |   | |   |  ___  | | |  \\ \\   | |");
     mvaddstr(16, 40, "|_____|   |_|   |_|   |_| |_|   \\_\\  |_|");
+    
+    mvaddstr(19, 40, "Press up, down, left or right arrow to begin.");
+    mvaddstr(20, 40, "Good luck !");
+}
+
+void draw_game_over(){
+    mvaddstr(8, 40, "  _____     _____    _     _   ____");
+    mvaddstr(9, 40, " /  ___|   / ___ \\  | \\   / | |  __|");
+    mvaddstr(10, 40, "| |  ___  | |   | | |  \\_/  | | |__");
+    mvaddstr(11, 40, "| | |_  | | |___| | | |\\ /| | |  __|");
+    mvaddstr(12, 40, "| |___| | |  ___  | | |   | | | |__");
+    mvaddstr(13, 40, " \\_____/  |_|   |_| |_|   |_| |____|");
+    
+    mvaddstr(14, 40, "  _____    _     _   ____   _____");
+    mvaddstr(15, 40, " / ___ \\  | |   | | |  __| |  __  \\");
+    mvaddstr(16, 40, "| |   | | | |   | | | |__  | |__|  |");
+    mvaddstr(17, 40, "| |   | | \\ \\  / /  |  __| |  __  /");
+    mvaddstr(18, 40, "| |___| |  \\ \\/ /   | |__  | |  \\ \\");
+    mvaddstr(19, 40, " \\_____/    \\__/    |____| |_|   \\_\\");
+}
+
+void delete_message(){
+    for (int i = 8; i < 21; i++) {
+        mvaddstr(i, 40, "                                                          ");
+    }
 }
 
 int init(){
@@ -186,6 +211,7 @@ void run(){
                 matrix.move_up();
                 if (movement) matrix.new_number();
                 movement = false;
+                delete_message();
                 break;
             case KEY_DOWN:
             case 'd':
@@ -193,6 +219,7 @@ void run(){
                 matrix.move_down();
                 if (movement) matrix.new_number();
                 movement = false;
+                delete_message();
 //                if (!matrix.is_fully()) matrix.new_number();
                 break;
             case KEY_LEFT:
@@ -201,6 +228,7 @@ void run(){
                 matrix.move_left();
                 if (movement) matrix.new_number();
                 movement = false;
+                delete_message();
 //                if (!matrix.is_fully()) matrix.new_number();
                 break;
             case KEY_RIGHT:
@@ -209,6 +237,7 @@ void run(){
                 matrix.move_right();
                 if (movement) matrix.new_number();
                 movement = false;
+                delete_message();
 //                if (!matrix.is_fully()) matrix.new_number();
                 break;
             default:
@@ -219,8 +248,7 @@ void run(){
         
         // Ajouter un nombre dans la matrice
         if (matrix.is_fully()) {
-            mvaddstr(100, 40, "Game Over !");
-        
+            draw_game_over();
         }
         
         show_matrix();

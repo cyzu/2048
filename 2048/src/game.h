@@ -16,6 +16,8 @@ void replace_hight_score(int score);
 void draw_square(int size);
 void show_matrix();
 void draw_start();
+void draw_game_over();
+void delete_message();
 
 int init();
 void close();
