@@ -92,6 +92,15 @@ void show_matrix(){
     }
 }
 
+void draw_start(){
+    mvaddstr(11, 40, " _____   ______    ____    _____    _____");
+    mvaddstr(12, 40, "|  ___| |__  __| / ___ \\  |  __  \\ |__ __|");
+    mvaddstr(13, 40, "| |___    | |   | |   | | | |__| |   | |");
+    mvaddstr(14, 40, "|___  |   | |   | |___| | |  __  /   | |");
+    mvaddstr(15, 40, " ___| |   | |   |  ___  | | |  \\ \\   | |");
+    mvaddstr(16, 40, "|_____|   |_|   |_|   |_| |_|   \\_\\  |_|");
+}
+
 int init(){
     int score;
     std::ifstream file("doc/highScore");
@@ -158,7 +167,8 @@ void run(){
 //        write_text("y");
 //        y++;
 //    }
-    
+    // Draw "start"
+    draw_start();
     // Premier nombre
     matrix.new_number();
     
@@ -205,7 +215,8 @@ void run(){
                 break;
         }
         if (quit == true) break;
-//        mvaddch(y, x, '$');
+//        mvaddch(10, 40, '$');
+        
         // Ajouter un nombre dans la matrice
         if (matrix.is_fully()) {
             mvaddstr(100, 40, "Game Over !");

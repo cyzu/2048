@@ -15,6 +15,7 @@ void replace_hight_score(int score);
 
 void draw_square(int size);
 void show_matrix();
+void draw_start();
 
 int init();
 void close();
