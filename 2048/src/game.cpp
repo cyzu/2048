@@ -138,9 +138,11 @@ void close(){
 void run(){
     
     int input;
-    int x = xmin+30, y = ymin+30;
+//    int x = xmin+30, y = ymin+30;
     bool quit = false;
-    int score = 0, tick = 0;
+    int score = 0;
+    
+//, tick = 0;
     
 //    int x = 0, y = 0;
 //    for (int i = 0; i < 20; i++) {
@@ -157,10 +159,12 @@ void run(){
 //        y++;
 //    }
     
+    // Premier nombre
+    matrix.new_number();
     
     while(1){
         input = wgetch(window);
-        mvaddch(y, x, ' ');
+//        mvaddch(y, x, ' ');
         
         switch(input) {
             case 'q':
@@ -170,33 +174,50 @@ void run(){
             case 'e':
                 //y -= 1;
                 matrix.move_up();
+                if (movement) matrix.new_number();
+                movement = false;
                 break;
             case KEY_DOWN:
             case 'd':
 //                y += 1;
                 matrix.move_down();
+                if (movement) matrix.new_number();
+                movement = false;
+//                if (!matrix.is_fully()) matrix.new_number();
                 break;
             case KEY_LEFT:
             case 's':
 //                x -= 1;
                 matrix.move_left();
+                if (movement) matrix.new_number();
+                movement = false;
+//                if (!matrix.is_fully()) matrix.new_number();
                 break;
             case KEY_RIGHT:
             case 'f':
 //                x += 1;
                 matrix.move_right();
+                if (movement) matrix.new_number();
+                movement = false;
+//                if (!matrix.is_fully()) matrix.new_number();
                 break;
             default:
                 break;
         }
         if (quit == true) break;
-        mvaddch(y, x, '$');
+//        mvaddch(y, x, '$');
+        // Ajouter un nombre dans la matrice
+        if (matrix.is_fully()) {
+            mvaddstr(100, 40, "Game Over !");
+        
+        }
         
         show_matrix();
         
 //        write_score(score);
 //        usleep(100000); // 100 ms
-        tick++;
+        
+//        tick++;
         refresh();
     }
     if (score > high_score){

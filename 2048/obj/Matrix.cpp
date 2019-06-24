@@ -11,6 +11,8 @@
 #include <ctime>
 #include <math.h>
 
+bool movement = false;
+
 void Matrix::init_mfusion(){
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
@@ -27,6 +29,15 @@ bool Matrix::get_mfusion(int i, int j){
     return mfusion[i][j];
 }
 
+bool Matrix::is_fully(){
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            if (get(i, j) == 0) return false;
+        }
+    }
+    return true;
+}
+
 Matrix::Matrix(){
     std::srand((unsigned int)time(NULL));
     for (int i = 0; i < 4; i++){
@@ -35,16 +46,16 @@ Matrix::Matrix(){
         }
     }
     init_mfusion();
-    matrix[0][0] = 1;
-    matrix[0][2] = 1;
-    matrix[1][0] = 3;
-    matrix[1][1] = 1;
-    matrix[1][2] = 1;
-    matrix[1][3] = 1;
-    matrix[2][0] = 1;
-    matrix[2][1] = 1;
-    matrix[2][2] = 1;
-    matrix[2][3] = 1;
+//    matrix[0][0] = 1;
+//    matrix[0][2] = 1;
+//    matrix[1][0] = 3;
+//    matrix[1][1] = 1;
+//    matrix[1][2] = 1;
+//    matrix[1][3] = 1;
+//    matrix[2][0] = 1;
+//    matrix[2][1] = 1;
+//    matrix[2][2] = 1;
+//    matrix[2][3] = 1;
 }
 
 int Matrix::get_pow(int i, int j){
@@ -63,21 +74,21 @@ void Matrix::new_number(){
     int i = std::rand() % 4;
     int j = std::rand() % 4;
     
-    while (get(i, j) == 0){
+    while (get(i, j) != 0){
         i = std::rand() % 4;
         j = std::rand() % 4;
     }
     
     int two_or_four = std::rand() % 2;
-    if(two_or_four == 0) two_or_four = 2;
-    else two_or_four = 4;
+    if(two_or_four == 0) two_or_four = 1;
+    else two_or_four = 2;
     
     set(i, j, two_or_four);
 }
 
 void Matrix::move_up(){
     for (int colonne = 0; colonne < 4; colonne++) {
-        for (int ligne = 0; ligne < 3; ligne++) {
+        for (int ligne = 0; ligne < 4; ligne++) {
             // Fusion de case côte à côte
             if (ligne > 0 &&
                 get(ligne, colonne) > 0 &&
@@ -86,6 +97,8 @@ void Matrix::move_up(){
                     set(ligne - 1, colonne, get(ligne, colonne) + 1);
                     set(ligne, colonne, 0);
                     set_mfusion(ligne - 1, colonne);
+                
+                movement = true;
             }
             
             // Déplacement cases
@@ -106,6 +119,7 @@ void Matrix::move_up(){
                             set(ligne, colonne, 0);
                             set_mfusion(ligne - 1, colonne);
                     }
+                    movement = true;
                 }
             }
         }
@@ -115,7 +129,7 @@ void Matrix::move_up(){
     
 void Matrix::move_down(){
     for (int colonne = 0; colonne < 4; colonne++) {
-        for (int ligne = 3; ligne > 0; ligne--) {
+        for (int ligne = 3; ligne > -1; ligne--) {
             // Fusion de case côte à côte
             if (ligne < 3 &&
                 get(ligne, colonne) > 0 &&
@@ -124,6 +138,8 @@ void Matrix::move_down(){
                     set(ligne + 1, colonne, get(ligne, colonne) + 1);
                     set(ligne, colonne, 0);
                     set_mfusion(ligne + 1, colonne);
+                
+                movement = true;
             }
             
             // Déplacement cases
@@ -144,6 +160,7 @@ void Matrix::move_down(){
                             set(ligne, colonne, 0);
                             set_mfusion(ligne + 1, colonne);
                     }
+                    movement = true;
                 }
             }
         }
@@ -153,7 +170,7 @@ void Matrix::move_down(){
 
 void Matrix::move_left(){
     for (int ligne = 0; ligne < 4; ligne++) {
-        for (int colonne = 0; colonne < 3; colonne++) {
+        for (int colonne = 0; colonne < 4; colonne++) {
             // Fusion de case côte à côte
             if (colonne > 0 &&
                 get(ligne, colonne) > 0 &&
@@ -162,6 +179,8 @@ void Matrix::move_left(){
                     set(ligne, colonne - 1, get(ligne, colonne) + 1);
                     set(ligne, colonne, 0);
                     set_mfusion(ligne, colonne - 1);
+                
+                movement = true;
             }
             
             // Déplacement cases
@@ -182,9 +201,9 @@ void Matrix::move_left(){
                             set(ligne, colonne, 0);
                             set_mfusion(ligne, colonne - 1);
                     }
+                    movement = true;
                 }
             }
-            
         }
     }
     init_mfusion();
@@ -192,7 +211,7 @@ void Matrix::move_left(){
 
 void Matrix::move_right(){
     for (int ligne = 0; ligne < 4; ligne++) {
-        for (int colonne = 3; colonne > 0; colonne--) {
+        for (int colonne = 3; colonne > -1; colonne--) {
             // Fusion de case côte à côte
             if (colonne < 3 &&
                 get(ligne, colonne) > 0 &&
@@ -201,6 +220,8 @@ void Matrix::move_right(){
                     set(ligne, colonne + 1, get(ligne, colonne) + 1);
                     set(ligne, colonne, 0);
                     set_mfusion(ligne, colonne + 1);
+                
+                movement = true;
             }
             // Déplacement cases
             if (get(ligne, colonne) == 0){
@@ -220,6 +241,7 @@ void Matrix::move_right(){
                             set(ligne, colonne, 0);
                             set_mfusion(ligne, colonne + 1);
                     }
+                    movement = true;
                 }
             }
         }

@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 
+extern bool movement;
+
 class Matrix {
     private :
     int matrix[4][4];
@@ -24,6 +26,7 @@ class Matrix {
     
     public :
     Matrix();
+    bool is_fully();
     int get_pow(int i, int j); // Return 2^value
     void set(int i, int j, int v);
     void new_number();
