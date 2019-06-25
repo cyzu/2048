@@ -238,12 +238,9 @@ void run(){
             draw_start();
             matrix.new_number();
         }
-        
-        
         show_matrix();
-        
         write_score(score);
-//        usleep(100000); // 100 ms
+        
         refresh();
     }
     if (score > high_score){
