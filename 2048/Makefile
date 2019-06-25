@@ -26,6 +26,7 @@ bin/Matrix.o: obj/Matrix.cpp obj/Matrix.h
 
 clean ::
 	rm -f bin/*.o $(EXEC)
+#	echo 0 > doc/highScore
 
 #--------------------------------------------------------------------
 #bin/game.o: src/game.cpp src/game.h src/ObjectField.h

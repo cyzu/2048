@@ -12,6 +12,7 @@
 #include <math.h>
 
 bool movement = false;
+int score = 0;
 
 void Matrix::init_mfusion(){
     for (int i = 0; i < 4; i++) {
@@ -68,6 +69,16 @@ Matrix::Matrix(){
 //    matrix[2][3] = 1;
 }
 
+void Matrix::init_matrix(){
+    std::srand((unsigned int)time(NULL));
+    for (int i = 0; i < 4; i++){
+        for (int j = 0; j < 4; j++){
+            matrix[i][j] = 0;
+        }
+    }
+    init_mfusion();
+}
+
 int Matrix::get_pow(int i, int j){
     return (int) pow(2, matrix[i][j]);
 }
@@ -108,6 +119,7 @@ void Matrix::move_up(){
                     set(ligne, colonne, 0);
                     set_mfusion(ligne - 1, colonne);
                 
+                score += get_pow(ligne - 1, colonne);
                 movement = true;
             }
             
@@ -128,6 +140,8 @@ void Matrix::move_up(){
                             set(ligne - 1, colonne, get(ligne, colonne) + 1);
                             set(ligne, colonne, 0);
                             set_mfusion(ligne - 1, colonne);
+                    
+                            score += get_pow(ligne - 1, colonne);
                     }
                     movement = true;
                 }
@@ -149,6 +163,7 @@ void Matrix::move_down(){
                     set(ligne, colonne, 0);
                     set_mfusion(ligne + 1, colonne);
                 
+                score += get_pow(ligne + 1, colonne);
                 movement = true;
             }
             
@@ -169,6 +184,8 @@ void Matrix::move_down(){
                             set(ligne + 1, colonne, get(ligne, colonne) + 1);
                             set(ligne, colonne, 0);
                             set_mfusion(ligne + 1, colonne);
+                        
+                            score += get_pow(ligne + 1, colonne);
                     }
                     movement = true;
                 }
@@ -190,6 +207,7 @@ void Matrix::move_left(){
                     set(ligne, colonne, 0);
                     set_mfusion(ligne, colonne - 1);
                 
+                score += get_pow(ligne, colonne - 1);
                 movement = true;
             }
             
@@ -210,6 +228,8 @@ void Matrix::move_left(){
                             set(ligne, colonne - 1, get(ligne, colonne) + 1);
                             set(ligne, colonne, 0);
                             set_mfusion(ligne, colonne - 1);
+                        
+                            score += get_pow(ligne, colonne - 1);
                     }
                     movement = true;
                 }
@@ -231,6 +251,7 @@ void Matrix::move_right(){
                     set(ligne, colonne, 0);
                     set_mfusion(ligne, colonne + 1);
                 
+                score += get_pow(ligne, colonne + 1);
                 movement = true;
             }
             // Déplacement cases
@@ -250,6 +271,8 @@ void Matrix::move_right(){
                             set(ligne, colonne + 1, get(ligne, colonne) + 1);
                             set(ligne, colonne, 0);
                             set_mfusion(ligne, colonne + 1);
+                        
+                            score += get_pow(ligne, colonne + 1);
                     }
                     movement = true;
                 }

@@ -17,6 +17,7 @@ void draw_square(int size);
 void show_matrix();
 void draw_start();
 void draw_game_over();
+void write_help();
 void delete_message();
 
 int init();

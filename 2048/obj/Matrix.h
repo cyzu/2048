@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 extern bool movement;
+extern int score;
 
 class Matrix {
     private :
@@ -26,6 +27,7 @@ class Matrix {
     
     public :
     Matrix();
+    void init_matrix();
     bool is_fully();
     int get_pow(int i, int j); // Return 2^value
     void set(int i, int j, int v);

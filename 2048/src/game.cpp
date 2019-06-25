@@ -120,6 +120,12 @@ void draw_game_over(){
     mvaddstr(19, 40, " \\_____/    \\__/    |____| |_|   \\_\\");
 }
 
+void write_help(){
+    mvaddstr(30, xmin, "Press 'q' anytime to quit the game.");
+    mvaddstr(31, xmin, "Press 'r' anytime to restart the game.");
+}
+
+
 void delete_message(){
     for (int i = 8; i < 21; i++) {
         mvaddstr(i, 40, "                                                          ");
@@ -172,42 +178,24 @@ void close(){
 void run(){
     
     int input;
-//    int x = xmin+30, y = ymin+30;
-    bool quit = false;
-    int score = 0;
+    bool quit = false, restart = false;
     
-//, tick = 0;
-    
-//    int x = 0, y = 0;
-//    for (int i = 0; i < 20; i++) {
-//        move(x, y);
-//        write_text("x");
-//        x++;
-//    }
-//
-//    x = 0;
-//    y = 0;
-//    for (int i = 0; i < 20; i++) {
-//        move(x, y);
-//        write_text("y");
-//        y++;
-//    }
-    // Draw "start"
+    write_help();
     draw_start();
-    // Premier nombre
     matrix.new_number();
     
     while(1){
         input = wgetch(window);
-//        mvaddch(y, x, ' ');
         
         switch(input) {
             case 'q':
                 quit = true;
                 break;
+            case 'r':
+                restart = true;
+                break;
             case KEY_UP:
             case 'e':
-                //y -= 1;
                 matrix.move_up();
                 if (movement) matrix.new_number();
                 movement = false;
@@ -215,48 +203,46 @@ void run(){
                 break;
             case KEY_DOWN:
             case 'd':
-//                y += 1;
                 matrix.move_down();
                 if (movement) matrix.new_number();
                 movement = false;
                 delete_message();
-//                if (!matrix.is_fully()) matrix.new_number();
                 break;
             case KEY_LEFT:
             case 's':
-//                x -= 1;
                 matrix.move_left();
                 if (movement) matrix.new_number();
                 movement = false;
                 delete_message();
-//                if (!matrix.is_fully()) matrix.new_number();
                 break;
             case KEY_RIGHT:
             case 'f':
-//                x += 1;
                 matrix.move_right();
                 if (movement) matrix.new_number();
                 movement = false;
                 delete_message();
-//                if (!matrix.is_fully()) matrix.new_number();
                 break;
             default:
                 break;
         }
-        if (quit == true) break;
-//        mvaddch(10, 40, '$');
-        
-        // Ajouter un nombre dans la matrice
-        if (matrix.is_fully()) {
-            draw_game_over();
+        if (quit) break;
+        if (matrix.is_fully()) draw_game_over();
+        if (restart){
+            quit = false;
+            restart = false;
+            score = 0;
+            
+            delete_message();
+            matrix.init_matrix();
+            draw_start();
+            matrix.new_number();
         }
+        
         
         show_matrix();
         
-//        write_score(score);
+        write_score(score);
 //        usleep(100000); // 100 ms
-        
-//        tick++;
         refresh();
     }
     if (score > high_score){
