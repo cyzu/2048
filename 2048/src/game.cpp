@@ -123,6 +123,7 @@ void draw_game_over(){
 void write_help(){
     mvaddstr(30, xmin, "Press 'q' anytime to quit the game.");
     mvaddstr(31, xmin, "Press 'r' anytime to restart the game.");
+    mvaddstr(43, xmin, "Copyright © 2019 Cyzu. All rights reserved.");
 }
 
 
