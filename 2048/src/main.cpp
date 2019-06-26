@@ -6,9 +6,6 @@
 //  Copyright © 2019 Cyzu. All rights reserved.
 //
 
-//#include <iostream>
-//#include <cstdint>
-
 #include "game.h"
 
 int main(int argc, const char * argv[]) {

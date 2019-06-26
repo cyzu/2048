@@ -6,12 +6,12 @@
 #  Created by Chloé Yukino on 25/06/2019.
 #  Copyright © 2019 Cyzu. All rights reserved.
 
-echo "This script will install ncurses library..."
+echo "This script will install ncurses library...\n"
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-# Linux ...
+# Linux
     sudo apt-get update
-    sudo apt-getupgrade
+    sudo apt-get upgrade
 # Install gcc & ncurses library
     sudo apt-get install build-essential
     sudo apt-get install libncurses-dev ncurses-dev libncurses5-dev libncursesw5-dev
@@ -21,7 +21,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 # Mac OSX
     brew install ncurses
 
+#elif [[ "ver" == "Microsoft Windows"* ]]; then
+## Windows
 fi
 
-echo "Installation finished !"
+echo "\nInstallation finished !"
 echo "Run command 'make' to continue."
+echo "Then run './bin/game_2048' to start the game !"

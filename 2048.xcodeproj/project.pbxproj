@@ -26,7 +26,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7A04348B22C2CB1A0081C828 /* configuration.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = configuration.sh; sourceTree = "<group>"; };
+		7A04348B22C2CB1A0081C828 /* install */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = install; sourceTree = "<group>"; };
 		7A38792822465ECE00633364 /* Matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
 		7A38792922465ECE00633364 /* Matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
 		7AE7F230222EFD9B00DCE426 /* 2048 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 2048; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,7 +79,7 @@
 				7AE7F23B222EFDDF00DCE426 /* src */,
 				7AE7F23A222EFDD900DCE426 /* bin */,
 				7AE7F23C222EFE0500DCE426 /* Makefile */,
-				7A04348B22C2CB1A0081C828 /* configuration.sh */,
+				7A04348B22C2CB1A0081C828 /* install */,
 			);
 			path = 2048;
 			sourceTree = "<group>";
