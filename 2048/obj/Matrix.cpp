@@ -43,9 +43,8 @@ bool Matrix::is_fully(){
         for (int j = 0; j < 3; j++) {
             if (get(i, j) == get(i+1, j) || get(i, j) == get(i, j+1)) return false;
         }
+        if (get(i, 3) == get(i+1, 3) || get(3, i) == get(3, i+1)) return false;
     }
-    // Vérifier dernière case
-    if (get(3, 3) == get(2, 3) || get(3, 3) == get(3, 2)) return false;
     return true;
 }
 
