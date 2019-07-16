@@ -89,9 +89,9 @@ void Matrix::new_number(){
         j = std::rand() % 4;
     }
     
-    int two_or_four = std::rand() % 2;
-    if(two_or_four == 0) two_or_four = 1;
-    else two_or_four = 2;
+    int two_or_four = std::rand() % 4;
+    if(two_or_four == 0) two_or_four = 2; // Une chance sur 4 de sortir un 4
+    else two_or_four = 1;                 // Sinon sortir un 2
     
     set(i, j, two_or_four);
 }
