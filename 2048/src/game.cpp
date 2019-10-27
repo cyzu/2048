@@ -120,6 +120,10 @@ void draw_game_over(){
     mvaddstr(19, 40, " \\_____/    \\__/    |____| |_|   \\_\\");
 }
 
+void draw_no_move(){
+     mvaddstr(14, 40, "There is no move possible toward this side...");
+}
+
 void write_help(){
     mvaddstr(30, xmin, "Press 'q' anytime to quit the game.");
     mvaddstr(31, xmin, "Press 'r' anytime to restart the game.");
@@ -198,30 +202,43 @@ void run(){
             case KEY_UP:
             case 'e':
                 matrix.move_up();
-                if (movement) matrix.new_number();
-                movement = false;
-                delete_message();
+                if (movement) {
+                    matrix.new_number();
+                    movement = false;
+                    delete_message();
+                }
+                else draw_no_move();
+                
                 break;
             case KEY_DOWN:
             case 'd':
                 matrix.move_down();
-                if (movement) matrix.new_number();
-                movement = false;
-                delete_message();
+                if (movement) {
+                    matrix.new_number();
+                    movement = false;
+                    delete_message();
+                }
+                else draw_no_move();
                 break;
             case KEY_LEFT:
             case 's':
                 matrix.move_left();
-                if (movement) matrix.new_number();
-                movement = false;
-                delete_message();
+                if (movement) {
+                    matrix.new_number();
+                    movement = false;
+                    delete_message();
+                }
+                else draw_no_move();;
                 break;
             case KEY_RIGHT:
             case 'f':
                 matrix.move_right();
-                if (movement) matrix.new_number();
-                movement = false;
-                delete_message();
+                if (movement) {
+                    matrix.new_number();
+                    movement = false;
+                    delete_message();
+                }
+                else draw_no_move();
                 break;
             default:
                 break;

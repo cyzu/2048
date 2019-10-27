@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
+   uuid = "788B30F1-1FE8-4167-B551-2852D76AFBC1"
    type = "1"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "21F6B07B-3949-49B7-9CB7-706C8D43FA9D"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -15,13 +17,14 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "38"
             endingLineNumber = "38"
-            landmarkName = "replace_hight_score(int score)"
+            landmarkName = "replace_hight_score(score)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "13826C36-D26C-45B5-BF47-31DC45323987"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -38,6 +41,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "DE59BD04-3448-4FD9-A65F-70941E36B620"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -54,6 +58,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "830F8AE2-23D9-45D5-BC40-C90469EC533F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
