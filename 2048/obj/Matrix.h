@@ -24,9 +24,10 @@ class Matrix {
     bool get_mfusion(int i, int j);
     
     int get(int i, int j); // Return value of matrix
-    
+
     public :
     Matrix();
+    
     void init_matrix();
     bool is_fully();
     int get_pow(int i, int j); // Return 2^value

@@ -15,6 +15,12 @@
 #include "game.h"
 #include "../obj/Matrix.h"
 
+#define NONE    -1
+#define RIGHT   0
+#define LEFT    1
+#define DOWN    2
+#define UP      3
+
 WINDOW *window;
 Matrix matrix;
 
@@ -83,8 +89,8 @@ void show_matrix(){
                 default:
                     break;
             }
-            
             mvaddstr(y, x, str.c_str());
+            
             x += case_size_x+1;
         }
         x = first_case_x;
@@ -93,54 +99,107 @@ void show_matrix(){
 }
 
 void draw_start(){
-    mvaddstr(11, 40, " _____   ______    ____    _____    _____");
-    mvaddstr(12, 40, "|  ___| |__  __| / ___ \\  |  __  \\ |__ __|");
-    mvaddstr(13, 40, "| |___    | |   | |   | | | |__| |   | |");
-    mvaddstr(14, 40, "|___  |   | |   | |___| | |  __  /   | |");
-    mvaddstr(15, 40, " ___| |   | |   |  ___  | | |  \\ \\   | |");
-    mvaddstr(16, 40, "|_____|   |_|   |_|   |_| |_|   \\_\\  |_|");
+    mvaddstr(8, 40, " _____   ______    ____    _____    _____                 ");
+    mvaddstr(9, 40, "|  ___| |__  __| / ___ \\  |  __  \\ |__ __|                 ");
+    mvaddstr(10, 40, "| |___    | |   | |   | | | |__| |   | |                 ");
+    mvaddstr(11, 40, "|___  |   | |   | |___| | |  __  /   | |                 ");
+    mvaddstr(12, 40, " ___| |   | |   |  ___  | | |  \\ \\   | |                 ");
+    mvaddstr(13, 40, "|_____|   |_|   |_|   |_| |_|   \\_\\  |_|                 ");
     
-    mvaddstr(19, 40, "Press up, down, left or right arrow to begin.");
-    mvaddstr(20, 40, "Good luck !");
+    mvaddstr(17, 45, "            ^");
+    mvaddstr(18, 45, "Press   <       >   to begin and to move numbers.");
+    mvaddstr(19, 45, "            v");
+    mvaddstr(21, 45, "Good luck !");
 }
 
 void draw_game_over(){
-    mvaddstr(8, 40, "  _____     _____    _     _   ____");
-    mvaddstr(9, 40, " /  ___|   / ___ \\  | \\   / | |  __|");
-    mvaddstr(10, 40, "| |  ___  | |   | | |  \\_/  | | |__");
-    mvaddstr(11, 40, "| | |_  | | |___| | | |\\ /| | |  __|");
-    mvaddstr(12, 40, "| |___| | |  ___  | | |   | | | |__");
-    mvaddstr(13, 40, " \\_____/  |_|   |_| |_|   |_| |____|");
+    mvaddstr(8, 40, "  _____     _____    _     _   ____                    ");
+    mvaddstr(9, 40, " /  ___|   / ___ \\  | \\   / | |  __|                 ");
+    mvaddstr(10, 40, "| |  ___  | |   | | |  \\_/  | | |__                 ");
+    mvaddstr(11, 40, "| | |_  | | |___| | | |\\ /| | |  __|                 ");
+    mvaddstr(12, 40, "| |___| | |  ___  | | |   | | | |__                 ");
+    mvaddstr(13, 40, " \\_____/  |_|   |_| |_|   |_| |____|                 ");
     
-    mvaddstr(14, 40, "  _____    _     _   ____   _____");
-    mvaddstr(15, 40, " / ___ \\  | |   | | |  __| |  __  \\");
-    mvaddstr(16, 40, "| |   | | | |   | | | |__  | |__|  |");
-    mvaddstr(17, 40, "| |   | | \\ \\  / /  |  __| |  __  /");
-    mvaddstr(18, 40, "| |___| |  \\ \\/ /   | |__  | |  \\ \\");
-    mvaddstr(19, 40, " \\_____/    \\__/    |____| |_|   \\_\\");
+    mvaddstr(14, 40, "  _____    _     _   ____   _____                 ");
+    mvaddstr(15, 40, " / ___ \\  | |   | | |  __| |  __  \\                 ");
+    mvaddstr(16, 40, "| |   | | | |   | | | |__  | |__|  |                 ");
+    mvaddstr(17, 40, "| |   | | \\ \\  / /  |  __| |  __  /                 ");
+    mvaddstr(18, 40, "| |___| |  \\ \\/ /   | |__  | |  \\ \\                 ");
+    mvaddstr(19, 40, " \\_____/    \\__/    |____| |_|   \\_\\                 ");
+    
+    mvaddstr(21, 45, "Please press 'q' to quit or 'r' to restart new game !");
 }
 
 void draw_no_move(){
-     mvaddstr(14, 40, "There is no move possible toward this side...");
+     delete_message();
+     mvaddstr(14, 45, "There is no move possible toward this side...");
 }
 
-void write_help(){
-    mvaddstr(30, xmin, "Press 'q' anytime to quit the game.");
-    mvaddstr(31, xmin, "Press 'r' anytime to restart the game.");
-    mvaddstr(43, xmin, "Copyright © 2019 Cyzu. All rights reserved.");
+void draw_arrows(int direction){
+    int x = xmin + 10;
+    int y = ymin + 20;
+    switch (direction) {
+        case 0:
+            mvaddstr(y, x+4, "^");
+            mvaddstr(y+1, x, "<");
+            attron(A_BOLD);
+            mvaddstr(y+1, x+8, ">");
+            attroff(A_BOLD);
+            mvaddstr(y+2, x+4, "v");
+            break;
+        case 1:
+            mvaddstr(y, x+4, "^");
+            attron(A_BOLD);
+            mvaddstr(y+1, x, "<");
+            attroff(A_BOLD);
+            mvaddstr(y+1, x+8, ">");
+            mvaddstr(y+2, x+4, "v");
+            break;
+        case 2:
+            mvaddstr(y, x+4, "^");
+            mvaddstr(y+1, x, "<");
+            mvaddstr(y+1, x+8, ">");
+            attron(A_BOLD);
+            mvaddstr(y+2, x+4, "v");
+            attroff(A_BOLD);
+            break;
+        case 3:
+            attron(A_BOLD);
+            mvaddstr(y, x+4, "^");
+            attroff(A_BOLD);
+            mvaddstr(y+1, x, "<");
+            mvaddstr(y+1, x+8, ">");
+            mvaddstr(y+2, x+4, "v");
+            break;
+        default:
+//            mvaddstr(y, x+4, "^");
+//            mvaddstr(y+1, x, "<");
+//            mvaddstr(y+1, x+8, ">");
+//            mvaddstr(y+2, x+4, "v");
+            break;
+    }
+//    mvaddstr(y, x+4, "^");
+//    mvaddstr(y+3, x, "<");
+//    mvaddstr(y+3, x+8, ">");
+//    mvaddstr(y+6, x+4, "v");
 }
 
 
 void delete_message(){
-    for (int i = 8; i < 21; i++) {
+    for (int i = 8; i < 23; i++) {
         mvaddstr(i, 40, "                                                          ");
     }
 }
 
+void create_pairs(){
+    init_pair(0, COLOR_RED, getbkgd(window));
+    init_pair(1, COLOR_WHITE, COLOR_BLACK);
+}
+
+
 int init(){
     int score;
     std::ifstream file("doc/highScore");
-    
     window = initscr();
     cbreak();
     noecho();
@@ -163,6 +222,11 @@ int init(){
     }
     // Enable color modification
     start_color();
+    create_pairs();
+    
+    wbkgd(stdscr, COLOR_PAIR(1));
+    refresh();
+    wrefresh(stdscr);
     
     if (file.is_open()){
         file >> score;
@@ -185,9 +249,10 @@ void run(){
     int input;
     bool quit = false, restart = false;
     
-    write_help();
+    mvaddstr(43, xmin, "Copyright © 2019 Cyzu. All rights reserved.");
     draw_start();
     matrix.new_number();
+    draw_arrows(NONE);
     
     while(1){
         input = wgetch(window);
@@ -208,7 +273,7 @@ void run(){
                     delete_message();
                 }
                 else draw_no_move();
-                
+                draw_arrows(UP);
                 break;
             case KEY_DOWN:
             case 'd':
@@ -219,6 +284,7 @@ void run(){
                     delete_message();
                 }
                 else draw_no_move();
+                draw_arrows(DOWN);
                 break;
             case KEY_LEFT:
             case 's':
@@ -228,7 +294,8 @@ void run(){
                     movement = false;
                     delete_message();
                 }
-                else draw_no_move();;
+                else draw_no_move();
+                draw_arrows(LEFT);
                 break;
             case KEY_RIGHT:
             case 'f':
@@ -239,6 +306,7 @@ void run(){
                     delete_message();
                 }
                 else draw_no_move();
+                draw_arrows(RIGHT);
                 break;
             default:
                 break;

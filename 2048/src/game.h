@@ -18,8 +18,10 @@ void show_matrix();
 void draw_start();
 void draw_game_over();
 void draw_no_move();
-void write_help();
+void draw_arrows(int direction);
 void delete_message();
+
+void create_pairs();
 
 int init();
 void close();
