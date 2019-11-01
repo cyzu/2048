@@ -269,9 +269,10 @@ void run(){
                     matrix.new_number();
                     movement = false;
                     delete_message();
+                    draw_arrows(UP);
                 }
                 else draw_no_move();
-                draw_arrows(UP);
+                
                 break;
             case KEY_DOWN:
             case 'd':
@@ -281,9 +282,9 @@ void run(){
                     matrix.new_number();
                     movement = false;
                     delete_message();
+                    draw_arrows(DOWN);
                 }
                 else draw_no_move();
-                draw_arrows(DOWN);
                 break;
             case KEY_LEFT:
             case 's':
@@ -293,9 +294,9 @@ void run(){
                     matrix.new_number();
                     movement = false;
                     delete_message();
+                    draw_arrows(LEFT);
                 }
                 else draw_no_move();
-                draw_arrows(LEFT);
                 break;
             case KEY_RIGHT:
             case 'f':
@@ -305,9 +306,9 @@ void run(){
                     matrix.new_number();
                     movement = false;
                     delete_message();
+                    draw_arrows(RIGHT);
                 }
                 else draw_no_move();
-                draw_arrows(RIGHT);
                 break;
             default:
                 break;
