@@ -28,6 +28,7 @@ int xmin = 5, ymin = 3;
 int case_size_x = 6, case_size_y = 3;
 int first_case_y = ymin+5+2, first_case_x = xmin+2;
 int high_score;
+bool game_over = false;
 
 void write_score(int score){
     std::string str = "Score : " + std::to_string(score);
@@ -127,7 +128,7 @@ void draw_game_over(){
     mvaddstr(18, 40, "| |___| |  \\ \\/ /   | |__  | |  \\ \\                 ");
     mvaddstr(19, 40, " \\_____/    \\__/    |____| |_|   \\_\\                 ");
     
-    mvaddstr(21, 45, "Please press 'q' to quit or 'r' to restart new game !");
+    mvaddstr(21, 45, "Please press 'q' to quit or 'r' to restart a new game !");
 }
 
 void draw_no_move(){
@@ -172,16 +173,12 @@ void draw_arrows(int direction){
             mvaddstr(y+2, x+4, "v");
             break;
         default:
-//            mvaddstr(y, x+4, "^");
-//            mvaddstr(y+1, x, "<");
-//            mvaddstr(y+1, x+8, ">");
-//            mvaddstr(y+2, x+4, "v");
+            mvaddstr(y, x+4, "^");
+            mvaddstr(y+1, x, "<");
+            mvaddstr(y+1, x+8, ">");
+            mvaddstr(y+2, x+4, "v");
             break;
     }
-//    mvaddstr(y, x+4, "^");
-//    mvaddstr(y+3, x, "<");
-//    mvaddstr(y+3, x+8, ">");
-//    mvaddstr(y+6, x+4, "v");
 }
 
 
@@ -266,6 +263,7 @@ void run(){
                 break;
             case KEY_UP:
             case 'e':
+                if (game_over) break;
                 matrix.move_up();
                 if (movement) {
                     matrix.new_number();
@@ -277,6 +275,7 @@ void run(){
                 break;
             case KEY_DOWN:
             case 'd':
+                if (game_over) break;
                 matrix.move_down();
                 if (movement) {
                     matrix.new_number();
@@ -288,6 +287,7 @@ void run(){
                 break;
             case KEY_LEFT:
             case 's':
+                if (game_over) break;
                 matrix.move_left();
                 if (movement) {
                     matrix.new_number();
@@ -299,6 +299,7 @@ void run(){
                 break;
             case KEY_RIGHT:
             case 'f':
+                if (game_over) break;
                 matrix.move_right();
                 if (movement) {
                     matrix.new_number();
@@ -312,7 +313,10 @@ void run(){
                 break;
         }
         if (quit) break;
-        if (matrix.is_fully()) draw_game_over();
+        if (matrix.is_fully()){
+            draw_game_over();
+            game_over = true;
+        }
         if (restart){
             quit = false;
             restart = false;
@@ -322,6 +326,7 @@ void run(){
             matrix.init_matrix();
             draw_start();
             matrix.new_number();
+            draw_arrows(NONE);
         }
         show_matrix();
         write_score(score);
