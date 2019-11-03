@@ -21,6 +21,7 @@
 #define DOWN    2
 #define UP      3
 
+
 WINDOW *window;
 Matrix matrix;
 
@@ -69,13 +70,16 @@ void draw_square(int size){
 }
 
 void show_matrix(){
-    int x = first_case_x, y = first_case_y;
+    int x = first_case_x, y = first_case_y, color = 0;
     std::string str;
     
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             if (matrix.get_pow(i, j) <= 1) str = "    ";
-            else str = std::to_string(matrix.get_pow(i, j));
+            else {
+                str = std::to_string(matrix.get_pow(i, j));
+                color = matrix.get(i, j);
+            }
             
             switch (str.length()) {
                 case 1:
@@ -90,7 +94,9 @@ void show_matrix(){
                 default:
                     break;
             }
+            attron(COLOR_PAIR(color+1));
             mvaddstr(y, x, str.c_str());
+            attroff(COLOR_PAIR(color+1));
             
             x += case_size_x+1;
         }
@@ -189,10 +195,29 @@ void delete_message(){
 }
 
 void create_pairs(){
-    init_pair(0, COLOR_RED, getbkgd(window));
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
+    
+//    for (int i = 2; i < 256; i++) {
+//        init_pair(i, i, COLOR_BLACK);
+//    }
+    
+    init_pair(2, 25, COLOR_BLACK);
+    init_pair(3, 30, COLOR_BLACK);
+    init_pair(4, 35, COLOR_BLACK);
+    init_pair(5, 43, COLOR_BLACK);
+    init_pair(6, 48, COLOR_BLACK);
+    init_pair(7, 46, COLOR_BLACK);
+    init_pair(8, 118, COLOR_BLACK);
+    init_pair(9, 154, COLOR_BLACK);
+    init_pair(10, 220, COLOR_BLACK);
+    init_pair(11, 256, COLOR_BLACK);
+    init_pair(12, 184, COLOR_BLACK);
+    init_pair(13, 208, COLOR_BLACK);
+    init_pair(14, 203, COLOR_BLACK);
+    init_pair(15, 169, COLOR_BLACK);
+    init_pair(16, 164, COLOR_BLACK);
+    init_pair(17, 160, COLOR_BLACK);
 }
-
 
 int init(){
     int score;
@@ -222,8 +247,22 @@ int init(){
     create_pairs();
     
     wbkgd(stdscr, COLOR_PAIR(1));
+    attron(1);
     refresh();
     wrefresh(stdscr);
+    
+    if (can_change_color()){
+//        mvaddstr(20, xmin, "can change  color ok !\n");
+//        for (int i = 0; i < 256; i++) {
+//            attron(COLOR_PAIR(i));
+//            printw("Aaa ");
+//            attroff(COLOR_PAIR(i));
+//
+//            if (i%10 == 0) printw("   ");
+//            if (i%30 == 0) printw("\n");
+//        }
+//        printw("My terminal supports %d colors.\n", COLORS);
+    }
     
     if (file.is_open()){
         file >> score;
@@ -321,6 +360,7 @@ void run(){
         if (restart){
             quit = false;
             restart = false;
+            game_over = false;
             score = 0;
             
             delete_message();
