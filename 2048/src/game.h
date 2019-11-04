@@ -22,6 +22,7 @@ void draw_arrows(int direction);
 void delete_message();
 
 void create_pairs();
+int popup(char option);
 
 int init();
 void close();

@@ -29,7 +29,7 @@ int xmin = 5, ymin = 3;
 int case_size_x = 6, case_size_y = 3;
 int first_case_y = ymin+5+2, first_case_x = xmin+2;
 int high_score;
-bool game_over = false;
+bool game_over = false, quit = false, restart = false;
 
 void write_score(int score){
     std::string str = "Score : " + std::to_string(score);
@@ -197,10 +197,6 @@ void delete_message(){
 void create_pairs(){
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
     
-//    for (int i = 2; i < 256; i++) {
-//        init_pair(i, i, COLOR_BLACK);
-//    }
-    
     init_pair(2, 25, COLOR_BLACK);
     init_pair(3, 30, COLOR_BLACK);
     init_pair(4, 35, COLOR_BLACK);
@@ -217,6 +213,52 @@ void create_pairs(){
     init_pair(15, 169, COLOR_BLACK);
     init_pair(16, 164, COLOR_BLACK);
     init_pair(17, 160, COLOR_BLACK);
+}
+
+int popup(char state){
+    WINDOW *popup = newwin(5, 50, 21, 40);
+    box(popup, '|', '-');
+    
+    if (state == 'q') mvwaddstr(popup, 1, 10, "Do you want to quit the game ?");
+    else mvwaddstr(popup, 1, 10, "Do you want to restart a new game ?");
+    
+    mvwaddstr(popup, 3, 11, "Yes [y]              No [n]");
+    wrefresh(popup);
+    
+    int input_key = wgetch(popup);
+    if (input_key == 'y' || input_key == 'Y' || input_key == 'o' || input_key == 'O') {
+        if (state == 'q'){ // le joueur veut quitter
+            return -1;
+        }
+        else { // le joueur veut recommencer
+            quit = false;
+            restart = false;
+            game_over = false;
+            delwin(popup);
+            score = 0;
+            wclear(window);
+            
+            delete_message();
+            matrix.init_matrix();
+            draw_start();
+            draw_square(4);
+            matrix.new_number();
+            draw_arrows(NONE);
+            wrefresh(window);
+        }
+    }
+    else if (input_key == 'n' || input_key == 'N'){ // le joueur a répondu "non"
+        game_over = false;
+        quit = false;
+        restart = false;
+        
+        delwin(popup);
+        
+        for (int i = 21; i < 27; i++) {
+            mvaddstr(i, 40, "                                                          ");
+        }
+    }
+    return 0;
 }
 
 int init(){
@@ -251,19 +293,6 @@ int init(){
     refresh();
     wrefresh(stdscr);
     
-    if (can_change_color()){
-//        mvaddstr(20, xmin, "can change  color ok !\n");
-//        for (int i = 0; i < 256; i++) {
-//            attron(COLOR_PAIR(i));
-//            printw("Aaa ");
-//            attroff(COLOR_PAIR(i));
-//
-//            if (i%10 == 0) printw("   ");
-//            if (i%30 == 0) printw("\n");
-//        }
-//        printw("My terminal supports %d colors.\n", COLORS);
-    }
-    
     if (file.is_open()){
         file >> score;
         high_score = score;
@@ -283,7 +312,6 @@ void close(){
 void run(){
     
     int input;
-    bool quit = false, restart = false;
     
     mvaddstr(43, xmin, "Copyright © 2019 Cyzu. All rights reserved.");
     draw_start();
@@ -352,22 +380,24 @@ void run(){
             default:
                 break;
         }
-        if (quit) break;
+        if (quit && popup('q') == -1) break;
+        
         if (matrix.is_fully()){
             draw_game_over();
             game_over = true;
         }
         if (restart){
-            quit = false;
-            restart = false;
-            game_over = false;
-            score = 0;
-            
-            delete_message();
-            matrix.init_matrix();
-            draw_start();
-            matrix.new_number();
-            draw_arrows(NONE);
+            popup('r');
+//            quit = false;
+//            restart = false;
+//            game_over = false;
+//            score = 0;
+//
+//            delete_message();
+//            matrix.init_matrix();
+//            draw_start();
+//            matrix.new_number();
+//            draw_arrows(NONE);
         }
         show_matrix();
         write_score(score);

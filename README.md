@@ -11,7 +11,7 @@ Execution : make, ./bin/game_2048
 
 
 TTODO :
-* Après avoir atteind 2048, continuer ou pas
-* Confirmation quitter
-* Mettre les couleurs pour les chiffres
+* Confirmation quitter --> afficher un pop up
+* Adapter pour linux et windows
+* redimention de fenêtre
 
