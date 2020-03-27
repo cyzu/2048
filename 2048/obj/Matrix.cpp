@@ -55,6 +55,10 @@ Matrix::Matrix(){
             matrix[i][j] = 0;
         }
     }
+    matrix[0][0] = 4;
+    matrix[0][1] = 2;
+    matrix[0][2] = 2;
+    matrix[0][3] = 0;
     init_mfusion();
 }
 
@@ -131,6 +135,7 @@ void Matrix::move_up(){
                             set_mfusion(ligne - 1, colonne);
                     
                             score += get_pow(ligne - 1, colonne);
+                            ligne -= 1; // Recommencer la boucle depuis la case vide créée par la fusion.
                     }
                     movement = true;
                 }
@@ -175,6 +180,7 @@ void Matrix::move_down(){
                             set_mfusion(ligne + 1, colonne);
                         
                             score += get_pow(ligne + 1, colonne);
+                            ligne += 1; // Recommencer la boucle depuis la case vide créée par la fusion.
                     }
                     movement = true;
                 }
@@ -219,6 +225,7 @@ void Matrix::move_left(){
                             set_mfusion(ligne, colonne - 1);
                         
                             score += get_pow(ligne, colonne - 1);
+                            colonne -= 1; // Recommencer la boucle depuis la case vide créée par la fusion.
                     }
                     movement = true;
                 }
@@ -262,6 +269,7 @@ void Matrix::move_right(){
                             set_mfusion(ligne, colonne + 1);
                         
                             score += get_pow(ligne, colonne + 1);
+                            colonne += 1; // Recommencer la boucle depuis la case vide créée par la fusion.
                     }
                     movement = true;
                 }

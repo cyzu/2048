@@ -9,6 +9,8 @@
 #ifndef Matrix_hpp
 #define Matrix_hpp
 
+// Matrix[ligne][colonne]
+
 #include <stdio.h>
 
 extern bool movement;

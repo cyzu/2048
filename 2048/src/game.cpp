@@ -411,6 +411,5 @@ void run(){
     if (score > high_score){
         replace_hight_score(score);
     }
-        
     close();
 }
