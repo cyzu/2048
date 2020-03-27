@@ -10,8 +10,8 @@ Expliquer algo de fusion
 Execution : make, ./bin/game_2048
 
 
-TTODO :
-* Confirmation quitter --> afficher un pop up
+TODO :
+
 * Adapter pour linux et windows
 * redimention de fenêtre
 

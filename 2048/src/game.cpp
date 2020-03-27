@@ -114,7 +114,7 @@ void draw_start(){
     mvaddstr(13, 40, "|_____|   |_|   |_|   |_| |_|   \\_\\  |_|                 ");
     
     mvaddstr(17, 45, "            ^");
-    mvaddstr(18, 45, "Press   <       >   to begin and to move numbers.");
+    mvaddstr(18, 45, "Press   <       >   to begin and move numbers.");
     mvaddstr(19, 45, "            v");
     mvaddstr(21, 45, "Good luck !");
 }
@@ -330,6 +330,7 @@ void run(){
                 break;
             case KEY_UP:
             case 'e':
+            case 'k':
                 if (game_over) break;
                 matrix.move_up();
                 if (movement) {
@@ -343,6 +344,7 @@ void run(){
                 break;
             case KEY_DOWN:
             case 'd':
+            case 'j':
                 if (game_over) break;
                 matrix.move_down();
                 if (movement) {
@@ -355,6 +357,7 @@ void run(){
                 break;
             case KEY_LEFT:
             case 's':
+            case 'h':
                 if (game_over) break;
                 matrix.move_left();
                 if (movement) {
@@ -367,6 +370,7 @@ void run(){
                 break;
             case KEY_RIGHT:
             case 'f':
+            case 'l':
                 if (game_over) break;
                 matrix.move_right();
                 if (movement) {
